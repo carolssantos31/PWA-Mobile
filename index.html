@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐾 Procure seu cachorro 🐾</title>
+  <meta name="theme-color" content="#0b8a2d">
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>🐾 Procure seu cachorro 🐾</h1>
+    <p class="subtitle">Geolocalização em tempo real</p>
+    <p>• Cachorros</p>
+    <p>• Câmera e Upload</p>
+  </header>
+
+  <main class="container">
+    <!-- GEOLOCALIZAÇÃO -->
+    <section class="card">
+      <h2>Geolocalização (tempo real)</h2>
+      <div id="geoStatus">Aguardando permissão...</div>
+      <div class="coords">
+        <div>Latitude: <span id="lat">—</span> -8.0489249</div>
+        <div>Longitude: <span id="lng">—</span>-34.8904208</div>
+        <div>Precisão: <span id="acc">—</span> metros</div>
+      </div>
+      <div class="geo-actions">
+        <button id="btnStartGeo">Ativar localização</button>
+        <button id="btnStopGeo" disabled>Parar localização</button>
+        <a id="openMaps" class="link" target="_blank" rel="noopener">Abrir no Google Maps</a>
+      </div>
+      
+    </section>
+
+    <!-- DOG API -->
+    <section class="card">
+      <h2>Procurar cachorros</h2>
+      <p>Busque uma foto aleatória de cachorro (API pública).</p>
+      <div class="dog-actions">
+        <button id="btnFetchDog">Buscar cachorro</button>
+        <select id="breedSelect">
+          <option value="">— selecionar raça —</option>
+          <option value="frances/buldog">buldog frances</option>
+          <option value="pug">pug</option>
+          <option value="retriever/golden">golden retriever</option>
+           <option value="dachshund">dachshund</option>
+            <option value="labrador">labrador</option>
+             <option value="terrier Yorkshire">Yorkshire terrier</option>
+             <option value="SDR">SDR</option>
+          <option value="akita">akita</option>
+        </select>
+      </div>
+      <div id="dogResult" class="dog-result">
+        <img id="dogImg" alt="Foto de cachorro" src="" />
+      </div>
+    </section>
+
+    <!-- CÂMERA -->
+    <section class="card">
+      <h2>Câmera & Upload</h2>
+      <p>Ative a câmera do dispositivo ou escolha uma imagem.</p>
+      <div class="camera">
+        <video id="video" playsinline autoplay muted></video>
+        <canvas id="canvas" style="display:none"></canvas>
+      </div>
+      <div class="camera-actions">
+        <button id="btnStartCam">Iniciar câmera</button>
+        <button id="btnCapture" disabled>Capturar foto</button>
+        <button id="btnStopCam" disabled>Parar câmera</button>
+        <imput id="fileInput" type="file" accept="image/*" capture="environment">
+      </div>
+      <div class="captured">
+        <h3>Última imagem</h3>
+        <img id="lastImage" alt="Última captura" src="" />
+        <a id="downloadLink" download="captura.png">Baixar imagem</a>
+      </div>
+    </section>
+
+    <section class="card small">
+      <h2>Instalação PWA</h2>
+      <p>Abra via HTTPS ou localhost para instalar o app como PWA.</p>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>Feito com ❤️ por Carolina Santos</small>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registrado', reg))
+        .catch(err => console.warn('Erro ao registrar SW:', err));
+    }
+  </script>
+</body>
+</html>
